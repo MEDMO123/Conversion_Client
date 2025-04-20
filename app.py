@@ -4,16 +4,9 @@ import pickle
 import os
 
 
-
-BASE_DIR = os.path.dirname(__file__)
-MODEL_PATH = os.path.join(BASE_DIR, ".\modele_conversion.pkl")
-
-st.write("📁 Chemin absolu du modèle :", MODEL_PATH)
-st.write("📦 Fichier existe :", os.path.exists(MODEL_PATH))
-
 try:
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
+    with open("modele_conversion.pkl", "rb") as f:
+        model=pickle.load(f)
 except Exception as e:
     st.error(f"❌ Erreur de chargement du modèle : {e}")
     st.stop()
