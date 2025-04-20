@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import os
 
+import os
+os.system("pip install scikit-learn")
 
 try:
     with open("modele_conversion.pkl", "rb") as f:
