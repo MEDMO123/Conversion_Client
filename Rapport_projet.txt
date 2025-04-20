@@ -1,0 +1,110 @@
+Rapport de Projet : Prédiction des Conversions des Visiteurs d’un Site E-commerce
+1. Introduction
+L'objectif de ce projet est de concevoir un modèle de machine learning capable de prédire la probabilité
+qu’un visiteur d’un site e-commerce effectue un achat. En utilisant des techniques de classification supervisée,
+nous avons développé une approche permettant d’exploiter les comportements des utilisateurs pour maximiser
+la précision des prévisions.
+
+2. Description du Dataset
+Le dataset utilisé provient de l’analyse des interactions des visiteurs sur un site e-commerce.
+ Il contient des informations sur leur navigation, telles que :
+- Le nombre de pages consultées
+- La durée passée sur chaque type de contenu
+- Les taux de rebond et de sortie
+- Le type d’utilisateur (nouveau ou revenant)
+- La période de visite
+- Le statut de conversion (achat ou non)
+Les données ont été nettoyées et prétraitées pour assurer une meilleure qualité et faciliter
+ l’apprentissage du modèle.
+
+3. Prétraitement des Données
+Avant d’entraîner le modèle, plusieurs étapes ont été réalisées :
+- Gestion des valeurs manquantes : Remplacement par la moyenne ou médiane.
+- Encodage des variables catégorielles : Transformation des données textuelles en valeurs numériques.
+- Détection et suppression des valeurs aberrantes : Utilisation de la méthode des quartiles pour filtrer les 
+  anomalies.
+- Normalisation des données : Mise à l’échelle des valeurs pour garantir une meilleure performance du modèle.
+
+
+4. Choix du Modèle et Optimisation
+Nous avons choisi le modèle de classification, notamment :
+- Random Forest :RandomForestClassifier est un excellent choix pour un problème de classification complexe
+où on veut stabilité, performance et une bonne interprétabilité.
+
+1. Robustesse et précision
+Méthode d’agrégation : Random Forest combine plusieurs arbres de décision, réduisant ainsi le risque 
+de surajustement.
+Bonne généralisation : Il fonctionne bien même avec des datasets déséquilibrés ou bruités.
+2. Gestion des caractéristiques complexes
+Capable de traiter des variables catégoriques et numériques sans transformation lourde.
+Gestion des interactions entre variables sans avoir à les modéliser explicitement.
+3. Résistance aux valeurs aberrantes
+Moins sensible aux outliers qu’un modèle linéaire.
+Chaque arbre est construit sur un sous-échantillon, ce qui limite l’influence des valeurs extrêmes.
+4. Explicabilité et importance des features
+Random Forest permet de mesurer l’importance des variables → On peut identifier les caractéristiques
+ influençant le plus la conversion.
+
+Le modèle final a été affiné à l’aide de RandomizedSearchCV, 
+permettant d’optimiser les hyperparamètres.
+
+
+5. Évaluation du Modèle
+Afin d’analyser la qualité des prédictions du modèle Random Forest, plusieurs indicateurs ont été utilisés.
+
+5.1 Matrice de Confusion
+La matrice de confusion permet d’identifier les erreurs de classification, en distinguant :
+Les vrais positifs (prédictions correctes de conversion)
+Les vrais négatifs (prédictions correctes de non-conversion)
+Les faux positifs (prédictions incorrectes de conversion)
+Les faux négatifs (prédictions incorrectes de non-conversion)
+Résultats obtenus :
+|                  | Prédiction : Achat | Prédiction : Non-Achat | 
+| Réel : Achat     | 85%                | 15% | 
+| Réel : Non-Achat | 14%                | 86% | 
+
+Ces résultats montrent que le modèle a une bonne précision, avec une faible proportion d’erreurs.
+5.2 Courbe ROC & AUC
+La courbe ROC illustre la capacité du modèle à distinguer les acheteurs des non-acheteurs.
+L’AUC (Area Under the Curve) permet de quantifier cette performance :
+- AUC obtenu : 0.93, indiquant une très bonne séparation entre les classes.
+- Un AUC proche de 1 signifie que le modèle fait peu d’erreurs dans ses classifications.
+
+
+5. Résultats et Performance
+Après entraînement et validation, les performances du modèle sont les suivantes :
+precision    recall  f1-score   support
+
+       False       0.86      0.86      0.86       391
+        True       0.85      0.85      0.85       373
+
+    accuracy                           0.86       764
+   macro avg       0.86      0.86      0.86       764
+weighted avg       0.86      0.86      0.86       764
+
+- Recall et précision équilibrés, permettant de minimiser les faux positifs et faux négatifs.
+Ces résultats indiquent que le modèle est fiable pour prédire les conversions, 
+bien qu’une amélioration soit envisageable en explorant des architectures plus complexes.
+
+
+6. Déploiement et Interface Utilisateur
+L’application a été développée avec Streamlit, permettant aux utilisateurs de :
+- Charger un fichier de données
+- Lancer une prédiction sur les visiteurs
+- Visualiser les résultats en temps réel
+
+Le déploiement s’est fait sur Streamlit Cloud, offrant une accessibilité simple et rapide.
+
+7. Perspectives et Améliorations
+Pour améliorer encore la précision, plusieurs pistes peuvent être explorées :
+- Affiner le Feature Engineering en exploitant des relations plus fines entre les données.
+- Intégrer du Deep Learning avec des modèles récurrents (LSTM) pour mieux comprendre les tendances temporelles.
+- Améliorer l’interactivité de l’application avec des visualisations plus avancées et des analyses prédictives
+ détaillées.
+
+Conclusion
+Ce projet montre l’efficacité de l’apprentissage automatique pour prédire les comportements des visiteurs 
+d’un site e-commerce. En combinant différentes méthodes de classification et d’optimisation,
+nous avons pu obtenir un modèle performant et utile pour l’aide à la décision.
+
+
